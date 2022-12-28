@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -32,6 +33,7 @@ public class Main extends Application {
 		
 		VBox vbox1=new VBox();//contenedor vertical izquierdo
 		
+		AnchorPane opciones=new AnchorPane();
 		
 		Image imgchatt=new Image("/Images/chatt.png");
 		ImageView viewchatt=new ImageView(imgchatt);
@@ -40,14 +42,9 @@ public class Main extends Application {
 		Button bt1=new Button();
 		bt1.setPrefSize(10.0, 10.0);
 		bt1.setGraphic(viewchatt);
-		bt1.setShape(new Circle(1));
-		bt1.setTranslateX(0);
-		bt1.setTranslateY(25);
+		//bt1.setShape(new Circle(1));
 		bt1.setCursor(Cursor.HAND);
-		//bt1.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-		//bt1.setGraphic(new ImageView(new Image("/Images/chatt.png") ));
-		//bt1.setShape(new Circle(5));
-		
+	
 		Image imgstatus=new Image("/Images/call.png");
 		ImageView viewstatus=new ImageView(imgstatus);
 		viewstatus.setFitHeight(30);
@@ -55,9 +52,7 @@ public class Main extends Application {
 		Button bt2=new Button();
 		bt2.setPrefSize(10.0, 10.0);
 		bt2.setGraphic(viewstatus);
-		bt2.setShape(new Circle(1));
-		bt2.setTranslateX(0);
-		bt2.setTranslateY(50 );
+		//bt2.setShape(new Circle(1));
 		bt2.setCursor(Cursor.HAND);
 		
 		Image imgcall=new Image("/Images/status.png");
@@ -67,9 +62,7 @@ public class Main extends Application {
 		Button bt3=new Button();
 		bt3.setPrefSize(10.0, 10.0);
 		bt3.setGraphic(viewcall);
-		bt3.setShape(new Circle(1));
-		bt3.setTranslateX(0);
-		bt3.setTranslateY(75);
+		//bt3.setShape(new Circle(1));
 		bt3.setCursor(Cursor.HAND);
 		
 		Image imgconfg=new Image("/Images/configuration.png");
@@ -79,17 +72,34 @@ public class Main extends Application {
 		Button bt4=new Button();
 		bt4.setPrefSize(10.0, 10.0);
 		bt4.setGraphic(viewconfg);
-		bt4.setShape(new Circle(1));
-		bt4.setTranslateX(0);
-		bt4.setTranslateY(250);		
+		//bt4.setShape(new Circle(1));
 		bt4.setCursor(Cursor.HAND);
 		
-		vbox1.getChildren().addAll(bt1,bt2,bt3,bt4);
+		Image imguser=new Image("/Images/user.jpg");
+		ImageView viewuser=new ImageView(imguser);
+		viewuser.setFitHeight(30);
+		viewuser.setFitWidth(30);
+		Button bt5=new Button();
+		bt5.setPrefSize(10.0, 10.0);
+		bt5.setGraphic(viewuser);
+		bt5.setShape(new Circle(1));
+		bt5.setCursor(Cursor.HAND);
 		
-		vbox1.setPrefSize(50, 500);
-		vbox1.setMinSize(50, 0);//minimo de la vbox
-		vbox1.setMaxSize(50, Double.MAX_VALUE);//maximo de vbox
-		vbox1.setBackground(new Background(new BackgroundFill(Color.web("2B2B2B"), CornerRadii.EMPTY, Insets.EMPTY)));
+		AnchorPane.setTopAnchor(bt1, 20.0);
+		
+		AnchorPane.setTopAnchor(bt2,70.0);
+		
+		AnchorPane.setTopAnchor(bt3,120.0);
+		
+		AnchorPane.setBottomAnchor(bt4,75.0);
+		
+		AnchorPane.setBottomAnchor(bt5,25.0);
+		
+		opciones.getChildren().addAll(bt1,bt2, bt3,bt4,bt5);
+		opciones.setPrefSize(50, 500);
+		opciones.setMinSize(50, 0);//minimo de la vbox
+		opciones.setMaxSize(50, Double.MAX_VALUE);//maximo de vbox
+		opciones.setBackground(new Background(new BackgroundFill(Color.web("2B2B2B"), CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		VBox vbox2=new VBox();//contenedor vertical medio
         vbox2.setPrefSize(350, 500);
@@ -97,6 +107,8 @@ public class Main extends Application {
         vbox2.setMaxSize(380, Double.MAX_VALUE);
         vbox2.setBackground(new Background(new BackgroundFill(Color.web("#212121"), CornerRadii.EMPTY, Insets.EMPTY)));
                 
+        
+        
         AnchorPane chatt= new AnchorPane();//contenedor derecho
         
         Label info=new Label("WhatsApp para Windows");
@@ -154,7 +166,7 @@ public class Main extends Application {
         chatt.setBackground(new Background(new BackgroundFill(Color.web("#2B2B2B"), CornerRadii.EMPTY, Insets.EMPTY)));//color de fondo
              
 		HBox hbox1=new HBox();//contenedor horizontal
-		hbox1.getChildren().addAll(vbox1,vbox2,chatt);
+		hbox1.getChildren().addAll(opciones,vbox2,chatt);
 		HBox.setHgrow(vbox1, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(vbox2, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(chatt, Priority.ALWAYS);//siempre se redimensione
