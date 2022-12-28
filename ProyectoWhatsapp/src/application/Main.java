@@ -33,6 +33,8 @@ public class Main extends Application {
 		
 		VBox vbox1=new VBox();//contenedor vertical izquierdo
 		
+		
+		
 		AnchorPane opciones=new AnchorPane();
 		
 		Image imgchatt=new Image("/Images/chatt.png");
