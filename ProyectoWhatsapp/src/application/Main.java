@@ -231,12 +231,14 @@ public class Main extends Application {
 		HBox.setHgrow(vbox2, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(chatt, Priority.ALWAYS);//siempre se redimensione
 		
+		
 		Scene scene=new Scene(hbox1,800,500);
 		primaryStage.setTitle("WhatsApp");	
 		primaryStage.setMinHeight(500);//minimo de altura al minimizar
 		primaryStage.setMinWidth(520);//minimo de anchura al minimizar
 		primaryStage.initStyle(StageStyle.DECORATED);//estilo de la escena
 		primaryStage.setFullScreen(false);//true para que al abrir se abra en pantalla completa, false para que no suceda esto
+		
 		primaryStage.getIcons().add(new Image("/Images/WhatsApp color.png"));//icono de la app, la imagen esta en el package "images"
 		primaryStage.setScene(scene);
 		primaryStage.show();
