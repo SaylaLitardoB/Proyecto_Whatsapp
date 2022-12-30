@@ -1,6 +1,7 @@
-package application;
+ package application;
 	
 import java.io.InputStream;
+
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -11,6 +12,9 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -31,9 +35,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		
+		
 		VBox vbox1=new VBox();//contenedor vertical izquierdo
-		
-		
 		
 		AnchorPane opciones=new AnchorPane();
 		
@@ -45,6 +48,7 @@ public class Main extends Application {
 		bt1.setPrefSize(10.0, 10.0);
 		bt1.setGraphic(viewchatt);
 		//bt1.setShape(new Circle(1));
+		//bt1.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 		bt1.setCursor(Cursor.HAND);
 	
 		Image imgstatus=new Image("/Images/call.png");
@@ -69,6 +73,7 @@ public class Main extends Application {
 		
 		Image imgconfg=new Image("/Images/configuration.png");
 		ImageView viewconfg=new ImageView(imgconfg);
+	
 		viewconfg.setFitHeight(30);
 		viewconfg.setFitWidth(30);
 		Button bt4=new Button();
@@ -101,21 +106,72 @@ public class Main extends Application {
 		opciones.setPrefSize(50, 500);
 		opciones.setMinSize(50, 0);//minimo de la vbox
 		opciones.setMaxSize(50, Double.MAX_VALUE);//maximo de vbox
-		opciones.setBackground(new Background(new BackgroundFill(Color.web("2B2B2B"), CornerRadii.EMPTY, Insets.EMPTY)));
+		opciones.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		
 		
 		VBox vbox2=new VBox();//contenedor vertical medio
+		
+		Label chattTittle=new Label("Chatt	     		");
+		chattTittle.setFont(new Font("",20));
+		chattTittle.setTextFill(Color.BLACK);//color al texto
+		
+		Image imgNewGroup=new Image("/Images/newchatt.png");
+		ImageView viewNewGroup=new ImageView(imgNewGroup);
+		viewNewGroup.setFitHeight(30);
+		viewNewGroup.setFitWidth(30);
+		Button btNewGroup=new Button();
+		btNewGroup.setPrefSize(10.0, 10.0);
+		btNewGroup.setGraphic(viewNewGroup);
+		//btNewGroup.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		btNewGroup.setCursor(Cursor.HAND);
+
+		Image imgMoreOptions=new Image("/Images/options.png");
+		ImageView viewOptions=new ImageView(imgMoreOptions);
+		viewOptions.setFitHeight(30);
+		viewOptions.setFitWidth(30);
+		Button btOptions=new Button();
+		btOptions.setPrefSize(10.0, 10.0);
+		btOptions.setGraphic(viewOptions);
+		btOptions.setCursor(Cursor.HAND);
+
+		TextField busqueda=new TextField();
+		busqueda.setPromptText("Busca un chatt o inicia uno nuevo 🔎");
+		
+		HBox hboxchatt=new HBox();
+		hboxchatt.getChildren().addAll(chattTittle,btNewGroup,btOptions);
+		hboxchatt.setBackground(new Background(new BackgroundFill(Color.web("#FDFEFE"), null, null)));
+		
+		ScrollPane scrollchatt=new ScrollPane();
+		
+		Image imgNewGroup1=new Image("/Images/newchatt.png");
+		ImageView viewNewGroup1=new ImageView(imgNewGroup1);
+		viewNewGroup1.setFitHeight(30);
+		viewNewGroup1.setFitWidth(30);
+		Button btNewGroup1=new Button();
+		btNewGroup1.setPrefSize(10.0, 10.0);
+		btNewGroup1.setGraphic(viewNewGroup1);
+		//btNewGroup.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		btNewGroup1.setCursor(Cursor.HAND);
+		
+		
+		scrollchatt.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);//agregar barra de desplazamiento cuando se necesite
+		scrollchatt.setPrefHeight(900);
+		scrollchatt.setContent(btNewGroup1);
+		
+		
         vbox2.setPrefSize(350, 500);
         vbox2.setMinSize(265, 0);
         vbox2.setMaxSize(380, Double.MAX_VALUE);
-        vbox2.setBackground(new Background(new BackgroundFill(Color.web("#212121"), CornerRadii.EMPTY, Insets.EMPTY)));
-                
+        vbox2.setBackground(new Background(new BackgroundFill(Color.web("#FDFEFE"), CornerRadii.EMPTY, Insets.EMPTY)));
+        vbox2.getChildren().addAll(hboxchatt,busqueda,scrollchatt);
         
         
         AnchorPane chatt= new AnchorPane();//contenedor derecho
         
         Label info=new Label("WhatsApp para Windows");
         info.setFont(new Font("",20));
-        info.setTextFill(Color.WHITE);//color al texto
+        info.setTextFill(Color.BLACK);//color al texto
         
         Label infosecond=new Label("Envia y recibe mensajes sin mantener tu telefono conectado.");
         infosecond.setTextFill(Color.GRAY);//color al texto
@@ -133,6 +189,8 @@ public class Main extends Application {
         ImageView logoW=new ImageView(image);//para visualizar el objeto con la imagen
         logoW.setFitHeight(75);//alto de la imagen
         logoW.setFitWidth(75);//ancho de imagen
+        
+        
         
         StackPane imgPane=new StackPane();
         imgPane.getChildren().add(logoW);
@@ -165,7 +223,7 @@ public class Main extends Application {
         
         chatt.setPrefSize(500,500);//dimension del archorpane
         chatt.getChildren().addAll(imgPane,info, infosecond, infothird, infocifrado);
-        chatt.setBackground(new Background(new BackgroundFill(Color.web("#2B2B2B"), CornerRadii.EMPTY, Insets.EMPTY)));//color de fondo
+        chatt.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), CornerRadii.EMPTY, Insets.EMPTY)));//color de fondo
              
 		HBox hbox1=new HBox();//contenedor horizontal
 		hbox1.getChildren().addAll(opciones,vbox2,chatt);
