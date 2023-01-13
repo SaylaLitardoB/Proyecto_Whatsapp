@@ -1,4 +1,4 @@
- package application;
+  package application;
 	
 import java.io.File;
 import java.io.InputStream;
@@ -187,7 +187,7 @@ public class Main extends Application {
 		
 		HBox hboxchatt=new HBox();
 		hboxchatt.getChildren().addAll(chattTittle,btNewChatt,btOptions);
-		hboxchatt.setBackground(new Background(new BackgroundFill(Color.web("#FDFEFE"), null, null)));
+		hboxchatt.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 		
 		
 		
@@ -242,8 +242,8 @@ public class Main extends Application {
 		Button user =new Button("Sayla Litardo");
 		user.setCursor(Cursor.HAND);
 		user.setPrefSize(295,40);
-		user.setEffect(new DropShadow(+25d, 0d, +2d, Color.GREENYELLOW));//Darle efectos a los botones
-		user.setBackground(new Background(new BackgroundFill(Color.BEIGE, null, null)));
+		///user.setEffect(new DropShadow(+25d, 0d, +2d, Color.web("#C6E1F1")));//Darle efectos a los botones
+		user.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
 		
 		//CHATT 1 - SAYLA
 		AnchorPane conversacion1=new AnchorPane();
@@ -314,7 +314,7 @@ public class Main extends Application {
 		
 		encabezado1.getChildren().addAll(circle_perfil,nombreusuario1,estado_user1,videollamada,llamada,search);
 		encabezado1.setPrefSize(980, 50);
-		encabezado1.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, null, null)));
+		encabezado1.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
 		
 	
 		//MENSAJES ENVIADOS Y RECIBIDOS
@@ -322,7 +322,7 @@ public class Main extends Application {
 		
 		
 		//MENSAJE 1
-		Label sms1=new Label("Hola, don Pichulon");
+		Label sms1=new Label("Hola, Cómo estas?");
 		sms1.setFont(new Font("Cambria",18));
 		AnchorPane smsrecibido1=new AnchorPane();
 		//smsrecibido1.setBackground(new Background(new BackgroundFill(Color.SALMON, null, null)));
@@ -333,12 +333,13 @@ public class Main extends Application {
 		VBox mensajes=new VBox(20);
 		mensajes.setPrefSize(975, 595);
 		mensajes.getChildren().addAll(smsrecibido1);
-		mensajes.setBackground(new Background(new BackgroundFill(Color.GREY, null, null)));
+		mensajes.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 				
 		mensajeschatt1.setPrefSize(980, 600);
-		mensajeschatt1.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, null, null)));
+		mensajeschatt1.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 		mensajeschatt1.setContent(mensajes);
 		mensajeschatt1.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		mensajeschatt1.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		//AREA DE ESCRIBIR Y BOTON
 		List<Label>sms=new ArrayList<>();
@@ -348,6 +349,8 @@ public class Main extends Application {
 		
 		Button send=new Button("Enviar");
 		send.setPrefSize(100, 50);
+		send.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+
 		send.setOnAction(evt->{
 			
 			sms.add(new Label(mensaje_enviar.getText()));
@@ -360,8 +363,7 @@ public class Main extends Application {
             	sms.get(x).setAlignment(Pos.CENTER_LEFT);
             	
             }
-			sms.get(x).setFont(new Font("Cambria",15));
-			sms.get(x).setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
+			sms.get(x).setFont(new Font("Cambria",18));
 			mensajes.getChildren().add(sms.get(x));
 			x++;
 			
@@ -383,7 +385,7 @@ public class Main extends Application {
 		
 	    conversacion1.getChildren().addAll(encabezado1,mensajeschatt1,mensaje_enviar,send);
 	    conversacion1.setPrefSize(1010, 750);
-	    conversacion1.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, null, null)));
+	    conversacion1.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 	    conversacion1.setLayoutX(335.0);
 	    conversacion1.setLayoutY(25.0);	    	    
 	    Popup popupConversacion1= new Popup();
@@ -423,8 +425,8 @@ public class Main extends Application {
 		
 		Button user2 =new Button("Sebastian");
 		user2.setPrefSize(275, 40);	
-		//user2.setBackground(new Background(new BackgroundFill(Color.web("#EAF2F8"), null, null)));
-		
+		user2.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+				
 		HBox chatt2=new HBox();
 	    chatt2.getChildren().addAll(fotochatt2,user2);	   
 	    chatt2.setPrefSize(295, 30);
@@ -447,7 +449,7 @@ public class Main extends Application {
         vbox2.setPrefSize(350, 500);
         vbox2.setMinSize(265, 0);
         vbox2.setMaxSize(285, Double.MAX_VALUE);
-        vbox2.setBackground(new Background(new BackgroundFill(Color.web("#FDFEFE"), CornerRadii.EMPTY, Insets.EMPTY)));
+        vbox2.setBackground(new Background(new BackgroundFill(Color.web("#FDFEF8"), CornerRadii.EMPTY, Insets.EMPTY)));
         vbox2.getChildren().addAll(hboxchatt,busqueda,scrollchatt);
         
         
@@ -542,4 +544,3 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-
