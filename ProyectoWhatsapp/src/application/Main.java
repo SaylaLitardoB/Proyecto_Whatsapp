@@ -1,25 +1,21 @@
-  package application;
-	
-import java.io.File;
+package application;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
@@ -34,28 +30,53 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class Main extends Application {
 	int x=0;
-	
 	@Override
 	public void start(Stage primaryStage) {
 		
-		
-		
-		VBox vbox1=new VBox();//contenedor vertical izquierdo
+		VBox izquierdaVbox = new VBox();//creamos un Vbox para poner todo dentro de un Hbox
+	      
+        Label lbTitle=new Label("Iniciar Sesion");
+        lbTitle.setFont(new Font("Times New Roman", 35));//darle fuente y tamaño
+        
+        VBox formularioVBox=new VBox();//creamos un contenedor para mejor organizacion del formulario
+
+        Label lbUsuario=new Label("Usuario");
+        lbUsuario.setFont(new Font("Times New Roman", 20));
+        Label lbContra=new Label("Contraseña");
+        lbContra.setFont(new Font("Times New Roman", 20));
+        Label lbGracias=new Label("Gracias por preferinos!");
+
+        TextField textUser=new TextField();
+        textUser.setFont(new Font(15));
+        textUser.setPromptText("Ingrese su usuario:");
+        textUser.setPrefWidth(341);//para un tamaño fijo para cuando se maximize, ancho
+        textUser.setPrefHeight(44);
+       
+        PasswordField textContra=new PasswordField();
+        textContra.setFont(new Font(15));
+        textContra.setPromptText("Ingrese su contraseña:");
+        textContra.setPrefWidth(341);//para un tamaño fijo para cuando se maximize, ancho
+        textContra.setPrefHeight(44);
+
+        Button b1login= new Button("Login");
+        b1login.setMaxWidth(Double.MAX_VALUE);
+        b1login.setFont(new Font("Times New Roman",20));
+        b1login.setCursor(Cursor.HAND);//configurar el mouse cuando pase por el boton presente
+        b1login.setPrefWidth(370);//para un tamaño fijo para cuando se maximize, ancho
+        b1login.setPrefHeight(44);
+        
+        
+        VBox vbox1=new VBox();//contenedor vertical izquierdo
 		
 		AnchorPane opciones=new AnchorPane();
-		
 		
 		
 		Image imgchatt=new Image("/Images/chatt.png");
@@ -190,10 +211,6 @@ public class Main extends Application {
 		hboxchatt.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 		
 		
-		
-		
-		
-		
 		//SCRALLPANE / CHATTS
 		
 		
@@ -245,8 +262,11 @@ public class Main extends Application {
 		///user.setEffect(new DropShadow(+25d, 0d, +2d, Color.web("#C6E1F1")));//Darle efectos a los botones
 		user.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
 		
+		
+		
 		//CHATT 1 - SAYLA
 		AnchorPane conversacion1=new AnchorPane();
+		
 		
 		//ENCABEZADO 1
 		AnchorPane encabezado1=new AnchorPane();
@@ -410,9 +430,6 @@ public class Main extends Application {
 	    chatt1.getChildren().addAll(fotochatt1,user);	  
 	    chatt1.setPrefSize(295, 30);
 	    	    
-	    
-	    
-	   
 	   	Image img_user2=new Image("/Images/rana.jpg");
 		ImageView view_User2=new ImageView(img_user2);
 		view_User2.setFitHeight(30);
@@ -426,7 +443,171 @@ public class Main extends Application {
 		Button user2 =new Button("Sebastian");
 		user2.setPrefSize(275, 40);	
 		user2.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+		
+		
+		//CHATT 1 - SAYLA
+		AnchorPane conversacion2=new AnchorPane();
+		
+		//ENCABEZADO 1
+		AnchorPane encabezado2=new AnchorPane();
+		
+		//FOTO DE PERFIL DEL ENCABEZADO
+		Circle circle_perfil2 = new Circle(150,150,30);
+		circle_perfil2.setStroke(Color.SEAGREEN);
+        Image fotoperfil2 = new Image("/Images/rana.jpg");
+        circle_perfil2.setFill(new ImagePattern(fotoperfil2));
+        circle_perfil2.setEffect(new DropShadow(+25d, 0d, +2d, Color.WHITE));
+        
+        //NOMBRE DE USUARIO
+		Label nombreusuario2=new Label("Seb");
+		nombreusuario2.setFont(new Font("Cambria",20));
+		
+		//ESTADO DE USUARIO
+		Label estado_user2=new Label("En linea");
+		estado_user2.setFont(new Font("Cambria",15));
+		
+		//BOTON VIDEOLLAMADA
+		Image videocall_chatt2=new Image("/Images/videollamada.png");
+		ImageView view_videocallchatt2=new ImageView(videocall_chatt2);
+		view_videocallchatt2.setFitHeight(30);
+		view_videocallchatt2.setFitWidth(30);
+		Button videollamada2=new Button();
+		videollamada2.setPrefSize(10.0, 10.0);
+		videollamada2.setGraphic(view_videocallchatt2);	
+		videollamada2.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		videollamada2.setCursor(Cursor.HAND);
+		
+		//BOTON LLAMADA
+		Image call_chatt2=new Image("/Images/llamada.png");
+		ImageView view_callchatt2=new ImageView(call_chatt2);
+		view_callchatt2.setFitHeight(30);
+		view_callchatt2.setFitWidth(30);
+		Button llamada2=new Button();
+		llamada2.setPrefSize(10.0, 10.0);
+		llamada2.setGraphic(view_callchatt2);
+		llamada2.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		llamada2.setCursor(Cursor.HAND);
+		
+		//BOTON BUSQUEDA
+		Image search_chatt2=new Image("/Images/lupa.png");
+		ImageView view_searchchatt2=new ImageView(search_chatt2);
+		view_searchchatt2.setFitHeight(30);
+		view_searchchatt2.setFitWidth(30);
+		Button search2=new Button();
+		search2.setPrefSize(10.0, 10.0);
+		search2.setGraphic(view_searchchatt2);
+		search2.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		search2.setCursor(Cursor.HAND);
+		
+		AnchorPane.setTopAnchor(circle_perfil2, 10.0);
+		AnchorPane.setLeftAnchor(circle_perfil2, 10.0);
+		AnchorPane.setTopAnchor(nombreusuario2, 10.0);
+		AnchorPane.setLeftAnchor(nombreusuario2, 100.0);
+		AnchorPane.setTopAnchor(estado_user2, 40.0);
+		AnchorPane.setLeftAnchor(estado_user2, 100.0);
+		AnchorPane.setTopAnchor(videollamada2, 20.0);
+		AnchorPane.setRightAnchor(videollamada2, 125.0);
+		AnchorPane.setTopAnchor(llamada2, 20.0);
+		AnchorPane.setRightAnchor(llamada2, 75.0);
+		AnchorPane.setTopAnchor(search2, 20.0);
+		AnchorPane.setRightAnchor(search2, 10.0);
+		
+		encabezado2.getChildren().addAll(circle_perfil2,nombreusuario2,estado_user2,videollamada2,llamada2,search2);
+		encabezado2.setPrefSize(980, 50);
+		encabezado2.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
+		
+	
+		//MENSAJES ENVIADOS Y RECIBIDOS
+		ScrollPane mensajeschatt2=new ScrollPane();
+		
+		
+		//MENSAJE 1
+		Label sms2do=new Label("Hola, Cómo estas?");
+		sms2do.setFont(new Font("Cambria",18));
+		AnchorPane smsrecibido2=new AnchorPane();
+		//smsrecibido1.setBackground(new Background(new BackgroundFill(Color.SALMON, null, null)));
+		smsrecibido2.setPrefSize(Double.MIN_VALUE, Double.MIN_VALUE);
+		smsrecibido2.getChildren().addAll(sms2do);
+						
+		//LISTA SMS
+		VBox mensajes2=new VBox(20);
+		mensajes2.setPrefSize(975, 595);
+		mensajes2.getChildren().addAll(smsrecibido2);
+		mensajes2.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 				
+		mensajeschatt2.setPrefSize(980, 600);
+		mensajeschatt2.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+		mensajeschatt2.setContent(mensajes2);
+		mensajeschatt2.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		mensajeschatt2.setHbarPolicy(ScrollBarPolicy.NEVER);
+		
+		//AREA DE ESCRIBIR Y BOTON
+		List<Label>sms2 =new ArrayList<>();
+		TextArea mensaje_enviar2=new TextArea();
+		mensaje_enviar2.setPrefSize(870, 50);
+		mensaje_enviar2.setFont(new Font("Cambria",15));
+		
+		Button send2=new Button("Enviar");
+		send2.setPrefSize(100, 50);
+		send2.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+
+		send2.setOnAction(evt->{
+			
+			sms2.add(new Label(mensaje_enviar2.getText()));
+			mensaje_enviar2.clear();
+			
+			if(x %2== 0){
+            	sms2.get(x).setAlignment(Pos.TOP_RIGHT);
+            	
+            }else{
+            	sms2.get(x).setAlignment(Pos.CENTER_LEFT);
+            	
+            }
+			sms2.get(x).setFont(new Font("Cambria",18));
+			mensajes2.getChildren().add(sms2.get(x));
+			x++;
+			
+		});
+		
+		mensajeschatt2.setContent(mensajes2);
+		
+		mensajes2.setAlignment(Pos.TOP_RIGHT);
+		
+		//POSICIONAMIENTO
+		AnchorPane.setTopAnchor(encabezado2, 10.0);
+		AnchorPane.setLeftAnchor(encabezado2, 10.0);	
+		AnchorPane.setTopAnchor(mensajeschatt2, 85.0);
+		AnchorPane.setLeftAnchor(mensajeschatt2, 10.0);
+		AnchorPane.setBottomAnchor(mensaje_enviar2, 10.0);
+		AnchorPane.setLeftAnchor(mensaje_enviar2, 10.0);
+		AnchorPane.setBottomAnchor(send2, 10.0);
+		AnchorPane.setRightAnchor(send2, 20.0);
+		
+	    conversacion2.getChildren().addAll(encabezado2,mensajeschatt2,mensaje_enviar2,send2);
+	    conversacion2.setPrefSize(1010, 750);
+	    conversacion2.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+	    conversacion2.setLayoutX(335.0);
+	    conversacion2.setLayoutY(25.0);	    	    
+	    Popup popupConversacion2= new Popup();
+	    popupConversacion2.getContent().add(conversacion2);
+		user2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {			
+				 if (!popupConversacion2.isShowing()) {
+					 popupConversacion2.show(primaryStage);
+                     
+                 } else {
+                	 popupConversacion2.hide();                    
+
+                 }			
+	    		
+			}
+			
+		});
+		
+				
+
+	
 		HBox chatt2=new HBox();
 	    chatt2.getChildren().addAll(fotochatt2,user2);	   
 	    chatt2.setPrefSize(295, 30);
@@ -453,10 +634,6 @@ public class Main extends Application {
         vbox2.getChildren().addAll(hboxchatt,busqueda,scrollchatt);
         
         
-        
-        
-        
-        
         AnchorPane chatt= new AnchorPane();//contenedor derecho
         
         Label info=new Label("WhatsApp para Windows");
@@ -474,12 +651,11 @@ public class Main extends Application {
         
         InputStream inputstream;//inserccion de imagen
         inputstream=getClass().getResourceAsStream("/Images/whatsapp icon.png");
-        Image image=new Image(inputstream);//objeto con la imagen
+        Image imag=new Image(inputstream);//objeto con la imagen
         
-        ImageView logoW=new ImageView(image);//para visualizar el objeto con la imagen
+        ImageView logoW=new ImageView(imag);//para visualizar el objeto con la imagen
         logoW.setFitHeight(75);//alto de la imagen
         logoW.setFitWidth(75);//ancho de imagen
-        
         
         
         StackPane imgPane=new StackPane();
@@ -515,7 +691,6 @@ public class Main extends Application {
         chatt.getChildren().addAll(imgPane,info, infosecond, infothird, infocifrado);
         chatt.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), CornerRadii.EMPTY, Insets.EMPTY)));//color de fondo
              
-
        
 		
 		HBox hbox1=new HBox();//contenedor horizontal
@@ -524,18 +699,66 @@ public class Main extends Application {
 		HBox.setHgrow(vbox1, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(vbox2, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(chatt, Priority.ALWAYS);//siempre se redimensione
+        
+		b1login.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {			
+				 Scene sceneprincipal=new Scene(hbox1,1370,750);	
+				 primaryStage.setScene(sceneprincipal);
+				 primaryStage.setX(70);
+				 primaryStage.setY(15);
+				 
+			}
+			
+		});
+		
+
+        formularioVBox.getChildren().addAll(lbUsuario,textUser,lbContra,textContra,b1login,lbGracias);//agregamos los labels al container secundario de formulario
+        formularioVBox.setAlignment(Pos.TOP_LEFT);//poosicion
+        
+        VBox.setMargin(lbUsuario, new Insets(10,0,0,0));//margen arriba
+        VBox.setMargin(textUser, new Insets(0,0,0,0));
+        VBox.setMargin(lbContra, new Insets(10,0,0,0));
+        VBox.setMargin(b1login, new Insets(20,0,0,0));
+        VBox.setMargin(lbGracias, new Insets(0,0,0,0));
+
+        izquierdaVbox.getChildren().addAll(lbTitle,formularioVBox);//agregamos todo al contenedor izquierdo
+        izquierdaVbox.setPrefWidth(422);
+        izquierdaVbox.setAlignment(Pos.CENTER);
+        VBox.setMargin(formularioVBox,new Insets(0,30,0,30));//margen del contendor que esta con los layouts adentro
+        izquierdaVbox.setBackground(new Background(new BackgroundFill(Color.web("#25D366"), CornerRadii.EMPTY, Insets.EMPTY)));//poner colores de fondo al contenedor
+
+        VBox derechoVbox = new VBox();//Vbox para la derecha
+
+        InputStream inputStream;//aqui contendra nuestra imagen
+        inputStream=getClass().getResourceAsStream("/Images/Wh.png");//guardando la foto en ..
+        Image image=new Image(inputStream);//guardando la inserccion en "image"
+
+        ImageView imagenLogo;//creamos un view
+        imagenLogo= new ImageView(image);//guardamos esta imagen en el view
+        derechoVbox.getChildren().add(imagenLogo);
+
+        derechoVbox.setPrefWidth(422);
+        derechoVbox.setAlignment(Pos.CENTER);
+        derechoVbox.setBackground(new Background(new BackgroundFill(Color.web("#25D366"), CornerRadii.EMPTY, Insets.EMPTY)));//poner colores de fondo al contenedor
+
+        HBox root=new HBox();
+        root.getChildren().addAll(izquierdaVbox,derechoVbox);//agregar todo al contendor principal
+        
+        HBox.setHgrow(izquierdaVbox, Priority.ALWAYS);//setHgrow, define que va a pasar con los nodos cuando se redimensione la pantalla
+        HBox.setHgrow(derechoVbox, Priority.ALWAYS);
 		
 		
-		Scene scene= new Scene(hbox1,1000,650);
+		Scene scene= new Scene(root,800,500);
 		primaryStage.setTitle("WhatsApp");	
 		primaryStage.setMinHeight(500);//minimo de altura al minimizar
 		primaryStage.setMinWidth(520);//minimo de anchura al minimizar
 		//primaryStage.setX(20);
 		//primaryStage.setY(10);
 		primaryStage.initStyle(StageStyle.DECORATED);//estilo de la escena
-		primaryStage.setFullScreen(true);//true para que al abrir se abra en pantalla completa, false para que no suceda esto
-		primaryStage.getIcons().add(new Image("/Images/WhatsApp color.png"));//icono de la app, la imagen esta en el package "images"
-		
+		primaryStage.setFullScreen(false);//true para que al abrir se abra en pantalla completa, false para que no suceda esto
+		primaryStage.getIcons().add(new Image("/Images/WhatsApp color.png"));//icono de la app, la imagen esta en el package "images"
+	
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
