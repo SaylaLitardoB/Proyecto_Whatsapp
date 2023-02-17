@@ -11,7 +11,10 @@ import javafx.geometry.Pos;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import repositorio.MensajeRepository;
+import repositorio.UsuarioRepository;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -38,6 +42,10 @@ import javafx.scene.text.Font;
 
 public class Main extends Application {
 	int x=0;
+	int y=0;
+	int z=0;
+	public static Usuario login;
+	public static Usuario selected;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -73,11 +81,7 @@ public class Main extends Application {
         b1login.setPrefWidth(370);//para un tamaño fijo para cuando se maximize, ancho
         b1login.setPrefHeight(44);
         
-        
-        VBox vbox1=new VBox();//contenedor vertical izquierdo
-		
 		AnchorPane opciones=new AnchorPane();
-		
 		
 		Image imgchatt=new Image("/Images/chatt.png");
 		ImageView viewchatt=new ImageView(imgchatt);
@@ -120,6 +124,11 @@ public class Main extends Application {
 		bt4.setGraphic(viewconfg);
 		//bt4.setShape(new Circle(1));
 		bt4.setCursor(Cursor.HAND);
+		
+		//PENDIENTE
+		bt4.setOnAction(e ->{
+			regresarLogin(e);
+		});
 		
 		AnchorPane contendedor_photoperfil=new AnchorPane();
 		Image imguser=new Image("/Images/user.jpg");
@@ -173,8 +182,8 @@ public class Main extends Application {
 		
 		opciones.getChildren().addAll(bt1,bt2, bt3,bt4,bt5);
 		opciones.setPrefSize(50, 500);
-		opciones.setMinSize(50, 0);//minimo de la vbox
-		opciones.setMaxSize(50, Double.MAX_VALUE);//maximo de vbox
+		opciones.setMinSize(50, 0);//minimo de Archorpane
+		opciones.setMaxSize(50, Double.MAX_VALUE);//maximo de Archorpane
 		opciones.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		
@@ -238,16 +247,16 @@ public class Main extends Application {
 		contendedor_photo.setLayoutY(-50.0);
 		contendedor_photo.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
 		
-		Popup popup3= new Popup();
-		popup3.getContent().add(contendedor_photo);
+		Popup popup= new Popup();
+		popup.getContent().add(contendedor_photo);
 		fotochatt1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {			
-				 if (!popup3.isShowing()) {
-                     popup3.show(primaryStage);
+				 if (!popup.isShowing()) {
+                     popup.show(primaryStage);
                      
                  } else {
-                     popup3.hide();                    
+                     popup.hide();                    
 
                  }			
 	    		
@@ -263,10 +272,8 @@ public class Main extends Application {
 		user.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
 		
 		
-		
 		//CHATT 1 - SAYLA
 		AnchorPane conversacion1=new AnchorPane();
-		
 		
 		//ENCABEZADO 1
 		AnchorPane encabezado1=new AnchorPane();
@@ -356,7 +363,7 @@ public class Main extends Application {
 		mensajes.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 				
 		mensajeschatt1.setPrefSize(980, 600);
-		mensajeschatt1.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+		mensajeschatt1.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
 		mensajeschatt1.setContent(mensajes);
 		mensajeschatt1.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		mensajeschatt1.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -430,6 +437,11 @@ public class Main extends Application {
 	    chatt1.getChildren().addAll(fotochatt1,user);	  
 	    chatt1.setPrefSize(295, 30);
 	    	    
+	    
+	    
+	    
+	    
+	    //Sebastian
 	   	Image img_user2=new Image("/Images/rana.jpg");
 		ImageView view_User2=new ImageView(img_user2);
 		view_User2.setFitHeight(30);
@@ -440,12 +452,42 @@ public class Main extends Application {
 		//btNewGroup.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 		fotochatt2.setCursor(Cursor.HAND);
 		
-		Button user2 =new Button("Sebastian");
+		AnchorPane contendedor_photo2=new AnchorPane();
+		Image imgRana=new Image("/Images/rana.jpg");
+		ImageView viewRana=new ImageView(imgRana);
+		viewRana.setFitHeight(200);
+		viewRana.setFitWidth(200);
+		contendedor_photo2.getChildren().addAll(viewRana);
+		contendedor_photo2.setPrefSize(200, 200);
+		contendedor_photo2.setLayoutX(-300.0);
+		contendedor_photo2.setLayoutY(-50.0);
+		contendedor_photo2.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
+		
+		Popup popup2= new Popup();
+		popup2.getContent().add(contendedor_photo2);
+		fotochatt2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {			
+				 if (!popup2.isShowing()) {
+                     popup2.show(primaryStage);
+                     
+                 } else {
+                     popup2.hide();                    
+
+                 }			
+	    		
+			}
+			
+		});
+		
+		
+		Button user2 =new Button("Sebastian Garcia");
 		user2.setPrefSize(275, 40);	
+		user2.setCursor(Cursor.HAND);
 		user2.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
 		
 		
-		//CHATT 1 - SAYLA
+		//CHATT 1 - Sebastian
 		AnchorPane conversacion2=new AnchorPane();
 		
 		//ENCABEZADO 1
@@ -459,7 +501,7 @@ public class Main extends Application {
         circle_perfil2.setEffect(new DropShadow(+25d, 0d, +2d, Color.WHITE));
         
         //NOMBRE DE USUARIO
-		Label nombreusuario2=new Label("Seb");
+		Label nombreusuario2=new Label("Sebastian Garcia");
 		nombreusuario2.setFont(new Font("Cambria",20));
 		
 		//ESTADO DE USUARIO
@@ -536,7 +578,7 @@ public class Main extends Application {
 		mensajes2.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
 				
 		mensajeschatt2.setPrefSize(980, 600);
-		mensajeschatt2.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+		mensajeschatt2.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
 		mensajeschatt2.setContent(mensajes2);
 		mensajeschatt2.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		mensajeschatt2.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -556,16 +598,16 @@ public class Main extends Application {
 			sms2.add(new Label(mensaje_enviar2.getText()));
 			mensaje_enviar2.clear();
 			
-			if(x %2== 0){
-            	sms2.get(x).setAlignment(Pos.TOP_RIGHT);
+			if(y %2== 0){
+            	sms2.get(y).setAlignment(Pos.TOP_RIGHT);
             	
             }else{
-            	sms2.get(x).setAlignment(Pos.CENTER_LEFT);
+            	sms2.get(y).setAlignment(Pos.CENTER_LEFT);
             	
             }
-			sms2.get(x).setFont(new Font("Cambria",18));
-			mensajes2.getChildren().add(sms2.get(x));
-			x++;
+			sms2.get(y).setFont(new Font("Cambria",18));
+			mensajes2.getChildren().add(sms2.get(y));
+			y++;
 			
 		});
 		
@@ -605,17 +647,244 @@ public class Main extends Application {
 			
 		});
 		
-				
-
-	
 		HBox chatt2=new HBox();
 	    chatt2.getChildren().addAll(fotochatt2,user2);	   
 	    chatt2.setPrefSize(295, 30);
 	    
 	   
+	    
+	    
+	    
+	    
+	    
+	    /*
+	    Chatt Saul*/
+	    Image img_user3=new Image("/Images/gumball.jpg");
+		ImageView view_User3=new ImageView(img_user3);
+		view_User3.setFitHeight(30);
+		view_User3.setFitWidth(30);
+		Button fotochatt3=new Button();
+		fotochatt3.setPrefSize(10.0, 10.0);
+		fotochatt3.setGraphic(view_User3);
+		//fotochatt1.setShape(new Circle(1));
+		//fotochatt1.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		fotochatt3.setCursor(Cursor.HAND);
 		
+		AnchorPane contendedor_photo3=new AnchorPane();
+		Image imgGumball=new Image("/Images/gumball.jpg");
+		ImageView viewGumball=new ImageView(imgGumball);
+		viewGumball.setFitHeight(200);
+		viewGumball.setFitWidth(200);
+		contendedor_photo3.getChildren().addAll(viewGumball);
+		contendedor_photo3.setPrefSize(200, 200);
+		contendedor_photo3.setLayoutX(-300.0);
+		contendedor_photo3.setLayoutY(-50.0);
+		contendedor_photo3.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
+		
+		Popup popup3= new Popup();
+		popup3.getContent().add(contendedor_photo3);
+		fotochatt3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {			
+				 if (!popup3.isShowing()) {
+                     popup3.show(primaryStage);
+                     
+                 } else {
+                     popup3.hide();                    
+
+                 }			
+	    		
+			}
+			
+		});
+	   
+				
+		Button user3 =new Button("Saul Litardo");
+		user3.setCursor(Cursor.HAND);
+		user3.setPrefSize(295,40);
+		///user.setEffect(new DropShadow(+25d, 0d, +2d, Color.web("#C6E1F1")));//Darle efectos a los botones
+		user3.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+		
+		
+		MensajeRepository mensajeRepository = new MensajeRepository();
+		
+		//CHATT 1 - SAUL
+		AnchorPane conversacion3=new AnchorPane();
+		
+		//ENCABEZADO 1
+		AnchorPane encabezado3=new AnchorPane();
+		
+		//FOTO DE PERFIL DEL ENCABEZADO
+		Circle circle_perfil3 = new Circle(150,150,30);
+		circle_perfil3.setStroke(Color.SEAGREEN);
+        Image fotoperfil3 = new Image("/Images/gumball.jpg");
+        circle_perfil3.setFill(new ImagePattern(fotoperfil3));
+        circle_perfil3.setEffect(new DropShadow(+25d, 0d, +2d, Color.WHITE));
+        
+        //NOMBRE DE USUARIO
+		Label nombreusuario3=new Label("Saul Litardo");
+		nombreusuario3.setFont(new Font("Cambria",20));
+		
+		//ESTADO DE USUARIO
+		Label estado_user3=new Label("En linea");
+		estado_user3.setFont(new Font("Cambria",15));
+		
+		//BOTON VIDEOLLAMADA
+		Image videocall_chatt3=new Image("/Images/videollamada.png");
+		ImageView view_videocallchatt3=new ImageView(videocall_chatt3);
+		view_videocallchatt3.setFitHeight(30);
+		view_videocallchatt3.setFitWidth(30);
+		Button videollamada3=new Button();
+		videollamada3.setPrefSize(10.0, 10.0);
+		videollamada3.setGraphic(view_videocallchatt3);	
+		videollamada3.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		videollamada3.setCursor(Cursor.HAND);
+		
+		//BOTON LLAMADA
+		Image call_chatt3=new Image("/Images/llamada.png");
+		ImageView view_callchatt3=new ImageView(call_chatt3);
+		view_callchatt3.setFitHeight(30);
+		view_callchatt3.setFitWidth(30);
+		Button llamada3=new Button();
+		llamada3.setPrefSize(10.0, 10.0);
+		llamada3.setGraphic(view_callchatt3);
+		llamada3.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		llamada3.setCursor(Cursor.HAND);
+		
+		//BOTON BUSQUEDA
+		Image search_chatt3=new Image("/Images/lupa.png");
+		ImageView view_searchchatt3=new ImageView(search_chatt3);
+		view_searchchatt3.setFitHeight(30);
+		view_searchchatt3.setFitWidth(30);
+		Button search3=new Button();
+		search3.setPrefSize(10.0, 10.0);
+		search3.setGraphic(view_searchchatt3);
+		search3.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+		search3.setCursor(Cursor.HAND);
+		
+		AnchorPane.setTopAnchor(circle_perfil3, 10.0);
+		AnchorPane.setLeftAnchor(circle_perfil3, 10.0);
+		AnchorPane.setTopAnchor(nombreusuario3, 10.0);
+		AnchorPane.setLeftAnchor(nombreusuario3, 100.0);
+		AnchorPane.setTopAnchor(estado_user3, 40.0);
+		AnchorPane.setLeftAnchor(estado_user3, 100.0);
+		AnchorPane.setTopAnchor(videollamada3, 20.0);
+		AnchorPane.setRightAnchor(videollamada3, 125.0);
+		AnchorPane.setTopAnchor(llamada3, 20.0);
+		AnchorPane.setRightAnchor(llamada3, 75.0);
+		AnchorPane.setTopAnchor(search3, 20.0);
+		AnchorPane.setRightAnchor(search3, 10.0);
+		
+		encabezado3.getChildren().addAll(circle_perfil3,nombreusuario3,estado_user3,videollamada3,llamada3,search3);
+		encabezado3.setPrefSize(980, 50);
+		encabezado3.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
+		
+	
+		//MENSAJES ENVIADOS Y RECIBIDOS
+		ScrollPane mensajeschatt3=new ScrollPane();
+		
+		//AREA DE ESCRIBIR Y BOTON
+		VBox mensajes3 =new VBox();
+		mensajes3.setPrefSize(975, 595);
+		mensajes3.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+		
+		mensajeschatt3.setPrefSize(980, 600);
+		mensajeschatt3.setContent(mensajes3);
+		mensajeschatt3.setBackground(new Background(new BackgroundFill(Color.web("#77DD77"), null, null)));
+		mensajeschatt3.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		mensajeschatt3.setHbarPolicy(ScrollBarPolicy.NEVER);
+		
+		
+		
+		List<Label>sms3 =new ArrayList<>();
+		TextArea mensaje_enviar3=new TextArea();
+		mensaje_enviar3.setPrefSize(870, 50);
+		mensaje_enviar3.setFont(new Font("Cambria",15));
+		Button send3=new Button("Enviar");
+		send3.setPrefSize(100, 50);
+		send3.setBackground(new Background(new BackgroundFill(Color.web("#B5C5D7"), null, null)));
+
+		send3.setOnAction(evt->{
+			
+			sms3.add(new Label(mensaje_enviar3.getText()));
+			mensaje_enviar3.clear();
+			
+			if(z %2== 0){
+            	sms3.get(z).setAlignment(Pos.TOP_RIGHT);
+            	
+            }else{
+            	sms3.get(z).setAlignment(Pos.CENTER_LEFT);
+            	
+            }
+			Label lbluser = new Label("Bryan  ");
+			
+			HBox mensajedueno= new HBox();
+			mensajedueno.getChildren().addAll(lbluser,sms3.get(z));
+			mensajes3.getChildren().addAll(mensajedueno);
+			
+			z++;
+			
+		});
+		
+		
+		
+		//POSICIONAMIENTO
+
+	
+		AnchorPane.setTopAnchor(encabezado3, 10.0);
+		AnchorPane.setLeftAnchor(encabezado3, 10.0);	
+		AnchorPane.setTopAnchor(mensajeschatt3, 85.0);
+		AnchorPane.setLeftAnchor(mensajeschatt3, 10.0);
+		AnchorPane.setBottomAnchor(mensaje_enviar3, 10.0);
+		AnchorPane.setLeftAnchor(mensaje_enviar3, 10.0);
+		AnchorPane.setBottomAnchor(send3, 10.0);
+		AnchorPane.setRightAnchor(send3, 20.0);
+		
+		//conversacion3.getChildren().add(flowPane);
+	    conversacion3.getChildren().addAll(encabezado3, mensajeschatt3,mensaje_enviar3,send3);
+	    conversacion3.setPrefSize(1010, 750);
+	    conversacion3.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), null, null)));
+	    conversacion3.setLayoutX(335.0);
+	    conversacion3.setLayoutY(25.0);	  
+	    
+		
+		List<Mensaje> mensajess = mensajeRepository.getMensajes(login, selected);
+		
+		for(Mensaje mensaje: mensajess) {
+			var fMessage = getBurbuja(mensaje);
+			mensajes3.getChildren().add(fMessage);
+		}
+		
+		Popup popupConversacion3= new Popup();
+	    popupConversacion3.getContent().add(conversacion3);
+		user3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {			
+				 if (!popupConversacion3.isShowing()) {
+					 popupConversacion3.show(primaryStage);
+                     
+                 } else {
+                	 popupConversacion3.hide();                    
+
+                 }			
+	    		
+			}
+			
+		});
+		
+		HBox chatt3=new HBox();
+	    chatt3.getChildren().addAll(fotochatt3,user3 );	  
+	    chatt3.setPrefSize(295, 30);
+	    
+	    
+	    
+	    
+	    
+	    
+	    //TODOS LOS CHATT EN LISTA
+	    
 		VBox listachatt= new VBox(10);
-		listachatt.getChildren().addAll(chatt1,chatt2);
+		listachatt.getChildren().addAll(chatt1,chatt2,chatt3);
 		listachatt.setPrefWidth(285);
 		
 		scrollchatt.setHbarPolicy(ScrollBarPolicy.NEVER);//agregar barra de desplazamiento cuando se necesite
@@ -624,8 +893,6 @@ public class Main extends Application {
 		scrollchatt.setPrefWidth(285);
 		scrollchatt.setContent(listachatt);
 	
-		
-		
 		
         vbox2.setPrefSize(350, 500);
         vbox2.setMinSize(265, 0);
@@ -692,18 +959,17 @@ public class Main extends Application {
         chatt.setBackground(new Background(new BackgroundFill(Color.web("#F5EEF8"), CornerRadii.EMPTY, Insets.EMPTY)));//color de fondo
              
        
-		
 		HBox hbox1=new HBox();//contenedor horizontal
 		
 		hbox1.getChildren().addAll(opciones,vbox2,chatt);
-		HBox.setHgrow(vbox1, Priority.ALWAYS);//siempre se redimensione
+		HBox.setHgrow(opciones, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(vbox2, Priority.ALWAYS);//siempre se redimensione
 		HBox.setHgrow(chatt, Priority.ALWAYS);//siempre se redimensione
         
 		b1login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {			
-				 Scene sceneprincipal=new Scene(hbox1,1370,750);	
+				 Scene sceneprincipal=new Scene(hbox1,1370,750);
 				 primaryStage.setScene(sceneprincipal);
 				 primaryStage.setX(70);
 				 primaryStage.setY(15);
@@ -712,7 +978,9 @@ public class Main extends Application {
 			
 		});
 		
-
+		
+		
+		//LOGIN
         formularioVBox.getChildren().addAll(lbUsuario,textUser,lbContra,textContra,b1login,lbGracias);//agregamos los labels al container secundario de formulario
         formularioVBox.setAlignment(Pos.TOP_LEFT);//poosicion
         
@@ -749,21 +1017,36 @@ public class Main extends Application {
         HBox.setHgrow(derechoVbox, Priority.ALWAYS);
 		
 		
-		Scene scene= new Scene(root,800,500);
+		Scene scene= new Scene(root,900,560);
 		primaryStage.setTitle("WhatsApp");	
-		primaryStage.setMinHeight(500);//minimo de altura al minimizar
-		primaryStage.setMinWidth(520);//minimo de anchura al minimizar
+		primaryStage.setMinWidth(800);//minimo de anchura al minimizar
+		primaryStage.setMinHeight(540);//minimo de altura al minimizar
 		//primaryStage.setX(20);
 		//primaryStage.setY(10);
 		primaryStage.initStyle(StageStyle.DECORATED);//estilo de la escena
 		primaryStage.setFullScreen(false);//true para que al abrir se abra en pantalla completa, false para que no suceda esto
 		primaryStage.getIcons().add(new Image("/Images/WhatsApp color.png"));//icono de la app, la imagen esta en el package "images"
-	
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	public static void regresarLogin(ActionEvent e) {
+		Node source = (Node) e.getSource();     //Me devuelve el elemento al que hice click
+		Stage stage = (Stage) source.getScene().getWindow();    //Me devuelve la ventana donde se encuentra el elemento
+		stage.close();
+		}
 	
+	public FlowPane getBurbuja(Mensaje mensaje) {
+		FlowPane fMessage = new FlowPane(10,10);
+		Label lbluser = new Label(mensaje.getEmisor().getUsername());
+		Label lblMessage = new Label(mensaje.getContenido());
+		fMessage.getChildren().addAll(lbluser, lblMessage);
+		return fMessage; 
+	}
 	public static void main(String[] args) {
+		UsuarioRepository usuarioRepository = new UsuarioRepository();
+		Main.login = usuarioRepository.getUsuario(1);
+		Main.selected = usuarioRepository.getUsuario(4);
 		launch(args);
+		
 	}
 }
