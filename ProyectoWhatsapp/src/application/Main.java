@@ -1,5 +1,11 @@
 package application;
 import java.io.InputStream;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1048,5 +1054,75 @@ public class Main extends Application {
 		Main.selected = usuarioRepository.getUsuario(4);
 		launch(args);
 		
+		
+		Connection conn = null;
+		PreparedStatement query;
+		
+		try {
+			
+			Class.forName("org.postgresql.Driver");
+            String url = "jdbc:postgresql://localhost:5432/BDWhatsApp";
+            String usuario = "postgres";
+            String contrasena = "2003";
+            
+            conn = DriverManager.getConnection(url, usuario, contrasena);
+
+            String sql = "SELECT iduser, nombre, apellido, username, password FROM public.users;";
+            query = conn.prepareStatement(sql);
+            
+            
+            ResultSet resultSet = query.executeQuery();
+            
+            System.out.println("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡");
+            System.out.println("\u001B[1m\t\t\tUSUARIOS\u001B[0m");
+            System.out.println("-------------------------------------------------------");
+            System.out.println(String.format("%-10s %-10s %-10s %-20s", "ID", "NOMBRE", "APELIIDO", "USERNAME"));
+            System.out.println("-------------------------------------------------------");
+            
+            while(resultSet.next()) {
+            	int id = resultSet.getInt("iduser");
+            	String name = resultSet.getString("nombre");
+            	String lastname = resultSet.getString("apellido");
+            	String username = resultSet.getString("username");
+            	
+            	System.out.println(String.format("%-10s %-10s %-10s %-20s", id, name, lastname, username));
+            }
+            System.out.println("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡");
+            
+            
+            
+            
+            String sql2 = "SELECT idmensaje, contenido, fecha, emisor, receptor FROM public.mensajes;";
+            query = conn.prepareStatement(sql2);
+            
+            
+            ResultSet resultSet2 = query.executeQuery();
+            
+            System.out.println("");
+            System.out.println("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡");
+            System.out.println("\u001B[1m\t\t\t\tMENSAJES\u001B[0m");
+            System.out.println("---------------------------------------------------------------------------------------------------------");
+            System.out.println(String.format("%-10s %-50s %-20s %-10s %-10s", "ID", "CONTENIDO", "FECHA", "EMISOR", "RECEPTOR"));
+            System.out.println("---------------------------------------------------------------------------------------------------------");
+            
+            while(resultSet2.next()) {
+            	int idmensaje = resultSet2.getInt("idmensaje");
+            	String contenido = resultSet2.getString("contenido");
+            	String fecha = resultSet2.getString("fecha");
+            	String emisor = resultSet2.getString("emisor");
+            	String receptor = resultSet2.getString("receptor");
+           
+            	System.out.println(String.format("%-10s %-50s %-20s %-10s %-10s", idmensaje, contenido, fecha, emisor, receptor));
+
+            }
+            System.out.println("≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡");
+			
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

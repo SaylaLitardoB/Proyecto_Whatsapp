@@ -47,4 +47,7 @@ public class Mensaje {
 	public void setReceptor(Usuario receptor) {
 		this.receptor = receptor;
 	}
+	public String toString() {
+		return "{\"id\":" + id + ", \"from\":" + emisor + ", \"to\":" + receptor + ", \"date\": \"" + fecha + "\", \"content\" :\"" + contenido + "\"}";
+	}
 }

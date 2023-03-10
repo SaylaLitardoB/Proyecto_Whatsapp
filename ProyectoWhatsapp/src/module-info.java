@@ -4,6 +4,7 @@ module ProyectoWhatsapp {
 	requires javafx.media;
 	requires javafx.base;
 	requires javafx.fxml;
+	requires java.sql;
 	
 	opens application to javafx.graphics, javafx.fxml;
 }
